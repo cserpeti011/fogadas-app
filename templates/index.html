@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fogadóiroda kereső</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 400px; margin: auto; }
+        label { display: block; margin-top: 15px; }
+        input, select, button { width: 100%; padding: 10px; margin-top: 5px; font-size: 1em; }
+        button { background-color: #007bff; color: white; border: none; border-radius: 5px; }
+        button:hover { background-color: #0056b3; cursor: pointer; }
+        .error { color: red; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h2>Fogadóiroda kereső</h2>
+
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form method="post">
+        <label for="match">Meccs (pl. Real Madrid - Barcelona):</label>
+        <input type="text" id="match" name="match" required />
+
+        <label for="event">Esemény (pl. Vendég nyer):</label>
+        <input type="text" id="event" name="event" required />
+
+        <label for="site">Válassz fogadóirodát:</label>
+        <select id="site" name="site" required>
+            <option value="">-- válassz --</option>
+            {% for key in BASE_URLS.keys() %}
+                <option value="{{ key }}">{{ key }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Keresés</button>
+    </form>
+</body>
+</html>
